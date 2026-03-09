@@ -10,4 +10,4 @@ export interface TimeDie {
   currentResult: number | null;
 }
 
-export type View = 'home' | 'dice-game' | 'other-game';
+export type View = 'home' | 'dice-game' | 'kama-game';
