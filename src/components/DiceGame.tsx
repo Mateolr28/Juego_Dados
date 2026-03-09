@@ -1,0 +1,407 @@
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Plus, Play, Timer, ArrowLeft, Trash2, RotateCcw } from 'lucide-react';
+import type { Die, TimeDie } from '../types';
+
+interface DieCardProps {
+  die: Die;
+  onUpdate: (id: string, values: string[]) => void;
+  onRemove: (id: string) => void;
+  isRolling: boolean;
+}
+
+function DieCard({ die, onUpdate, onRemove, isRolling }: DieCardProps) {
+  const [inputValue, setInputValue] = useState('');
+
+  const addValue = () => {
+    if (inputValue.trim()) {
+      onUpdate(die.id, [...die.values, inputValue.trim()]);
+      setInputValue('');
+    }
+  };
+
+  const removeValue = (index: number) => {
+    const newValues = [...die.values];
+    newValues.splice(index, 1);
+    onUpdate(die.id, newValues);
+  };
+
+  return (
+    <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm flex flex-col h-full">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-bold text-lg italic serif">{die.name}</h3>
+        <button
+          onClick={() => onRemove(die.id)}
+          className="p-2 text-stone-400 hover:text-red-500 transition-colors"
+        >
+          <Trash2 size={18} />
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-y-auto mb-4 max-h-40 space-y-2 pr-2 custom-scrollbar">
+        {die.values.map((val, idx) => (
+          <div key={idx} className="flex justify-between items-center bg-stone-50 px-3 py-1.5 rounded-xl border border-stone-100 group">
+            <span className="text-sm font-medium truncate">{val}</span>
+            <button
+              onClick={() => removeValue(idx)}
+              className="text-stone-300 hover:text-stone-500 opacity-0 group-hover:opacity-100 transition-all"
+            >
+              <Trash2 size={14} />
+            </button>
+          </div>
+        ))}
+        {die.values.length === 0 && (
+          <p className="text-xs text-stone-400 italic text-center py-4">Sin valores</p>
+        )}
+      </div>
+
+      <div className="flex gap-2 mb-6">
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addValue()}
+          placeholder="Añadir valor..."
+          className="flex-1 bg-stone-100 border-none rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-stone-200 outline-none"
+        />
+        <button
+          onClick={addValue}
+          className="p-2 bg-stone-900 text-white rounded-xl hover:bg-stone-800 transition-colors"
+        >
+          <Plus size={18} />
+        </button>
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-stone-100 flex flex-col items-center">
+        <span className="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">Resultado</span>
+        <motion.div
+          animate={isRolling ? {
+            rotate: [0, 10, -10, 10, 0],
+            scale: [1, 1.1, 1],
+            transition: { repeat: Infinity, duration: 0.2 }
+          } : {}}
+          className={`text-2xl font-black h-12 flex items-center justify-center text-center w-full ${die.currentResult ? 'text-stone-900' : 'text-stone-200'}`}
+        >
+          {die.currentResult || '—'}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+interface TimeDieCardProps {
+  timeDie: TimeDie;
+  onUpdate: (values: number[]) => void;
+  isRolling: boolean;
+}
+
+function TimeDieCard({ timeDie, onUpdate, isRolling }: TimeDieCardProps) {
+  const [inputValue, setInputValue] = useState('');
+
+  const addValue = () => {
+    const val = parseInt(inputValue);
+    if (!isNaN(val) && val > 0) {
+      onUpdate([...timeDie.values, val]);
+      setInputValue('');
+    }
+  };
+
+  const removeValue = (index: number) => {
+    const newValues = [...timeDie.values];
+    newValues.splice(index, 1);
+    onUpdate(newValues);
+  };
+
+  const formatTime = (seconds: number) => {
+    if (seconds < 60) return `${seconds}s`;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return secs === 0 ? `${mins}min` : `${mins}m ${secs}s`;
+  };
+
+  return (
+    <div className="bg-stone-900 text-white rounded-3xl p-6 shadow-xl flex flex-col h-full border border-stone-800">
+      <div className="flex items-center gap-2 mb-4">
+        <Timer size={20} className="text-stone-400" />
+        <h3 className="font-bold text-lg italic serif">Dado de Tiempo</h3>
+      </div>
+
+      <div className="flex-1 overflow-y-auto mb-4 max-h-40 space-y-2 pr-2 custom-scrollbar">
+        {timeDie.values.map((val, idx) => (
+          <div key={idx} className="flex justify-between items-center bg-stone-800 px-3 py-1.5 rounded-xl border border-stone-700 group">
+            <span className="text-sm font-medium">{formatTime(val)}</span>
+            <button
+              onClick={() => removeValue(idx)}
+              className="text-stone-500 hover:text-stone-300 opacity-0 group-hover:opacity-100 transition-all"
+            >
+              <Trash2 size={14} />
+            </button>
+          </div>
+        ))}
+        {timeDie.values.length === 0 && (
+          <p className="text-xs text-stone-500 italic text-center py-4">Sin tiempos</p>
+        )}
+      </div>
+
+      <div className="flex gap-2 mb-6">
+        <input
+          type="number"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addValue()}
+          placeholder="Segundos..."
+          className="flex-1 bg-stone-800 border-none rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-stone-700 outline-none text-white"
+        />
+        <button
+          onClick={addValue}
+          className="p-2 bg-white text-stone-900 rounded-xl hover:bg-stone-100 transition-colors"
+        >
+          <Plus size={18} />
+        </button>
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-stone-800 flex flex-col items-center">
+        <span className="text-[10px] uppercase tracking-widest text-stone-500 font-bold mb-2">Tiempo Seleccionado</span>
+        <motion.div
+          animate={isRolling ? {
+            rotate: [0, -5, 5, -5, 0],
+            scale: [1, 1.05, 1],
+            transition: { repeat: Infinity, duration: 0.25 }
+          } : {}}
+          className={`text-3xl font-black h-12 flex items-center justify-center ${timeDie.currentResult ? 'text-white' : 'text-stone-800'}`}
+        >
+          {timeDie.currentResult ? formatTime(timeDie.currentResult) : '—'}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+export function DiceGame({ onBack }: { onBack: () => void }) {
+  const [dice, setDice] = useState<Die[]>([]);
+  const [timeDie, setTimeDie] = useState<TimeDie>({
+    values: [30, 45, 60, 120],
+    currentResult: null
+  });
+  const [isRolling, setIsRolling] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [showFinishedMessage, setShowFinishedMessage] = useState(false);
+  
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const bellAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Initialize bell sound
+    // Using a public bell sound URL
+    bellAudioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+    
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const addDie = () => {
+    const newDie: Die = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: `Dado ${dice.length + 1}`,
+      values: [],
+      currentResult: null
+    };
+    setDice([...dice, newDie]);
+  };
+
+  const updateDie = (id: string, values: string[]) => {
+    setDice(dice.map(d => d.id === id ? { ...d, values } : d));
+  };
+
+  const removeDie = (id: string) => {
+    setDice(dice.filter(d => d.id !== id));
+  };
+
+  const updateTimeDie = (values: number[]) => {
+    setTimeDie({ ...timeDie, values });
+  };
+
+  const play = () => {
+    if (isRolling) return;
+    
+    setIsRolling(true);
+    setShowFinishedMessage(false);
+    setIsTimerActive(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    // Simulate rolling for 1.5 seconds
+    setTimeout(() => {
+      setDice(prevDice => prevDice.map(d => ({
+        ...d,
+        currentResult: d.values.length > 0 ? d.values[Math.floor(Math.random() * d.values.length)] : null
+      })));
+
+      setTimeDie(prev => ({
+        ...prev,
+        currentResult: prev.values.length > 0 ? prev.values[Math.floor(Math.random() * prev.values.length)] : null
+      }));
+
+      setIsRolling(false);
+    }, 1500);
+  };
+
+  const startTimer = () => {
+    if (!timeDie.currentResult || isTimerActive) return;
+    
+    setTimeLeft(timeDie.currentResult);
+    setIsTimerActive(true);
+    setShowFinishedMessage(false);
+
+    if (timerRef.current) clearInterval(timerRef.current);
+    
+    timerRef.current = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev === null) return null;
+        if (prev <= 1) {
+          if (timerRef.current) clearInterval(timerRef.current);
+          setIsTimerActive(false);
+          setShowFinishedMessage(true);
+          bellAudioRef.current?.play().catch(e => console.log("Audio play failed", e));
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const formatTimer = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto p-6 min-h-screen flex flex-col">
+      <header className="flex justify-between items-center mb-12">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors font-medium"
+        >
+          <ArrowLeft size={20} />
+          Volver
+        </button>
+        <h2 className="text-2xl font-bold italic serif">Configuración de Dados</h2>
+        <div className="w-20"></div> {/* Spacer */}
+      </header>
+
+      <div className="flex-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* Time Die is always first */}
+          <TimeDieCard
+            timeDie={timeDie}
+            onUpdate={updateTimeDie}
+            isRolling={isRolling}
+          />
+
+          {/* Custom Dice */}
+          <AnimatePresence mode="popLayout">
+            {dice.map(die => (
+              <motion.div
+                key={die.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+              >
+                <DieCard
+                  die={die}
+                  onUpdate={updateDie}
+                  onRemove={removeDie}
+                  isRolling={isRolling}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
+          {/* Add Die Button Card */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={addDie}
+            className="border-2 border-dashed border-stone-200 rounded-3xl p-6 flex flex-col items-center justify-center text-stone-400 hover:border-stone-400 hover:text-stone-600 transition-all min-h-[300px]"
+          >
+            <div className="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mb-2">
+              <Plus size={24} />
+            </div>
+            <span className="font-semibold">Agregar dado</span>
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Control Bar */}
+      <div className="sticky bottom-8 left-0 right-0 flex flex-col items-center gap-6">
+        <AnimatePresence>
+          {(timeLeft !== null || showFinishedMessage) && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className={`px-8 py-4 rounded-full shadow-2xl flex items-center gap-6 border ${showFinishedMessage ? 'bg-red-500 text-white border-red-400' : 'bg-white text-stone-900 border-stone-100'}`}
+            >
+              {showFinishedMessage ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-xl font-black uppercase tracking-tighter">Tiempo Finalizado</span>
+                  <button 
+                    onClick={() => setShowFinishedMessage(false)}
+                    className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                  >
+                    <RotateCcw size={20} />
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] uppercase tracking-widest font-bold opacity-50">Contador</span>
+                    <span className="text-3xl font-black tabular-nums">{formatTimer(timeLeft || 0)}</span>
+                  </div>
+                  <div className="w-px h-8 bg-stone-200" />
+                  <button
+                    onClick={() => {
+                      setIsTimerActive(false);
+                      if (timerRef.current) clearInterval(timerRef.current);
+                      setTimeLeft(null);
+                    }}
+                    className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400"
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="flex gap-4 p-2 bg-white/80 backdrop-blur-md border border-stone-200 rounded-full shadow-lg">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={play}
+            disabled={isRolling}
+            className="flex items-center gap-2 px-8 py-4 bg-stone-900 text-white rounded-full font-bold shadow-lg hover:bg-stone-800 transition-all disabled:opacity-50"
+          >
+            <Play size={20} fill="currentColor" />
+            JUGAR
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={startTimer}
+            disabled={!timeDie.currentResult || isTimerActive || isRolling}
+            className="flex items-center gap-2 px-8 py-4 bg-white border border-stone-200 text-stone-900 rounded-full font-bold shadow-sm hover:bg-stone-50 transition-all disabled:opacity-50"
+          >
+            <Timer size={20} />
+            INICIAR CONTADOR
+          </motion.button>
+        </div>
+      </div>
+    </div>
+  );
+}

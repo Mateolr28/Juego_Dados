@@ -1,0 +1,13 @@
+export interface Die {
+  id: string;
+  name: string;
+  values: string[];
+  currentResult: string | null;
+}
+
+export interface TimeDie {
+  values: number[]; // in seconds
+  currentResult: number | null;
+}
+
+export type View = 'home' | 'dice-game' | 'other-game';

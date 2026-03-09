@@ -1,0 +1,5 @@
+{
+  "name": "Dados Personalizados",
+  "description": "Una aplicación interactiva para crear y jugar con dados personalizados, incluyendo un dado de tiempo con contador regresivo.",
+  "requestFramePermissions": []
+}
