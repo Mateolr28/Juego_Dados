@@ -139,30 +139,51 @@ const POSITIONS: Position[] = [
   {
     name: "Libro",
     description:
-      "La mujer se tumba de espaldas, con los brazos y las piernas abiertos hacia los lados y una pierna doblada en la rodilla. La pareja masculina se tumba encima de la dama un poco oblicuamente, de modo que sus piernas abiertas y rectas quedan debajo de la pierna doblada de su querida. El hombre mantiene la parte superior de su cuerpo en la longitud del brazo recto, penetra en su dama de lado, es una posición muy singular, pruébala en la práctica.",
+      " La mujer se sienta con las nalgas sobre el pecho de él, como máximo cerca de su cuello y se inclina completamente hacia su pene. Las manos de la pareja femenina se apoyan en las caderas de él, su cabeza está entre las piernas de él. El hombre levanta la cabeza y acaricia la entrepierna de su dama, las manos se ponen en las nalgas de ella, o una de ellas puede usarse para satisfacer a la pareja femenina.",
     image:
       "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/02/10_2_2.png",
   },
   {
-    name: "Tornado",
+    name: "Jinete",
     description:
-      "La mujer se tumba de espaldas, con los brazos y las piernas abiertos hacia los lados y una pierna doblada en la rodilla. La pareja masculina se tumba encima de la dama un poco oblicuamente, de modo que sus piernas abiertas y rectas quedan debajo de la pierna doblada de su querida. El hombre mantiene la parte superior de su cuerpo en la longitud del brazo recto, penetra en su dama de lado, es una posición muy singular, pruébala en la práctica.",
+      "El hombre apoya la cabeza en la almohada y estira las piernas por delante; la mujer cabalga sobre el pene, manteniéndose en ancas. Para un mayor equilibrio, ella pone las manos en el pecho del hombre, haciendo un poco de apoyo. La pareja masculina sujeta a su amante por las piernas, pero también puede sentir su pecho agitado, acariciar el cuerpo o simplemente mirar.",
     image:
-      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/02/3_4_3.png",
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/1_10_2.png",
   },
   {
-    name: "Tornado",
+    name: "Cáncer",
     description:
-      "La mujer se tumba de espaldas, con los brazos y las piernas abiertos hacia los lados y una pierna doblada en la rodilla. La pareja masculina se tumba encima de la dama un poco oblicuamente, de modo que sus piernas abiertas y rectas quedan debajo de la pierna doblada de su querida. El hombre mantiene la parte superior de su cuerpo en la longitud del brazo recto, penetra en su dama de lado, es una posición muy singular, pruébala en la práctica.",
+      "La mujer se tumba de lado, con una pierna estirada, la otra totalmente doblada por la rodilla y el brazo doblado por el codo para apoyarse. El hombre se sitúa entre las piernas de su pareja femenina de forma que una pierna está ligeramente doblada y se sitúa junto a la pierna recta de su pareja femenina, y la otra está sobre el regazo de la mujer de piernas dobladas, él la penetra por detrás. Se apoya con los brazos, uno cerca de la espalda y el otro en el pecho de la compañera.",
     image:
-      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/02/3_4_3.png",
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/8_6_2.png",
   },
   {
-    name: "Tornado",
+    name: "Cleopatra",
     description:
-      "La mujer se tumba de espaldas, con los brazos y las piernas abiertos hacia los lados y una pierna doblada en la rodilla. La pareja masculina se tumba encima de la dama un poco oblicuamente, de modo que sus piernas abiertas y rectas quedan debajo de la pierna doblada de su querida. El hombre mantiene la parte superior de su cuerpo en la longitud del brazo recto, penetra en su dama de lado, es una posición muy singular, pruébala en la práctica.",
+      "La pareja femenina se sienta sobre sus piernas dobladas y ligeramente abiertas y echándose ligeramente hacia atrás se apoya en su brazo. La pareja masculina se sienta de rodillas frente a ella, sus brazos están cerca de los pies de ella y su cara está frente a la zona genital de la amante. En esta posición la chica lidera, puede dirigir a su pareja masculina en la dirección en la que tiene que moverse, y si él lo sabe todo por sí mismo, entonces como opción, ella puede acariciar suavemente su pecho.",
     image:
-      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/02/3_4_3.png",
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/11_5.png",
+  },
+  {
+    name: "Monja",
+    description:
+      "El hombre se acuesta de espaldas sobre una almohada, la parte superior de su cuerpo está en posición elevada y las piernas están rectas y separadas. La mujer se arrodilla entre las piernas de su pareja masculina de espaldas a él, de modo que sus espinillas queden bajo las caderas del hombre. Su cabeza está bajada, los brazos están rectos y situados cerca de sus rodillas. Sus manos están en las nalgas de la pareja femenina, las mueve al compás de las sacudidas.",
+    image:
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/2_9_3.png",
+  },
+  {
+    name: "Precipicio",
+    description:
+      "El hombre se tumba de espaldas y dobla las rodillas. La mujer monta el pene en posición de cara a su pareja masculina, dobla las piernas y separa las manos; su espalda se apoya en las piernas de su pareja masculina y echa la cabeza hacia atrás. Esta posición no sólo ofrece una vista magnífica a la pareja masculina, sino que también le permite acariciar el pecho y la entrepierna de su amante y aumentar el placer.",
+    image:
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/1_18_2.png",
+  },
+  {
+    name: "Mariposa",
+    description:
+      "La mujer se tumba convenientemente de lado, dobla ligeramente las rodillas y las acerca al cuerpo para poder coger sus pies con los brazos extendidos. El hombre se acuesta detrás de ella de lado, dobla un poco las rodillas, toma la cintura de su amante con una mano y pone la otra mano doblada en el codo debajo de la cabeza usándola como soporte. No encontrará nada complicado en esta posición, pero la condición obligatoria para el éxito del experimento es al menos el tamaño medio del pene de su pareja masculina.",
+    image:
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/13_10.png",
   },
 ];
 
