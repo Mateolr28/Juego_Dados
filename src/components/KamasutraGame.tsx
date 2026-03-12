@@ -185,6 +185,13 @@ const POSITIONS: Position[] = [
     image:
       "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/13_10.png",
   },
+  {
+    name: "Posición Vaquera Inversa (invertida)",
+    description:
+      "El hombre se acuesta de espaldas y la mujer se sienta encima, al igual que en la posición de vaquera regular, solo que ahora ella le da la espalda a su pareja.",
+    image:
+      "https://sexpositions.club/es/wp-content/uploads/sites/2/2016/03/2_41_3.png",
+  },
 ];
 
 export function KamasutraGame({ onBack }: { onBack: () => void }) {
