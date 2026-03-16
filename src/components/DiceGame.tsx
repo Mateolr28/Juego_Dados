@@ -178,8 +178,8 @@ function TimeDieCard({ timeDie, onUpdate, isRolling }: TimeDieCardProps) {
   );
 }
 
-const STORAGE_KEY_DICE = 'custom_dice_game_dice';
-const STORAGE_KEY_TIME = 'custom_dice_game_time';
+const STORAGE_KEY_DICE = 'custom_dice_game_dice_v2';
+const STORAGE_KEY_TIME = 'custom_dice_game_time_v2';
 
 const DEFAULT_DICE: Die[] = [
   {
@@ -203,9 +203,7 @@ export function DiceGame({ onBack }: { onBack: () => void }) {
     const saved = localStorage.getItem(STORAGE_KEY_DICE);
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        // Reset results on load
-        return parsed.map((d: Die) => ({ ...d, currentResult: null }));
+        return JSON.parse(saved);
       } catch (e) {
         console.error("Error parsing saved dice", e);
       }
@@ -217,11 +215,7 @@ export function DiceGame({ onBack }: { onBack: () => void }) {
     const saved = localStorage.getItem(STORAGE_KEY_TIME);
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        return {
-          values: parsed,
-          currentResult: null
-        };
+        return JSON.parse(saved);
       } catch (e) {
         console.error("Error parsing saved time values", e);
       }
@@ -241,14 +235,24 @@ export function DiceGame({ onBack }: { onBack: () => void }) {
   const bellAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Save to localStorage
     localStorage.setItem(STORAGE_KEY_DICE, JSON.stringify(dice));
   }, [dice]);
 
   useEffect(() => {
-    // Save to localStorage
-    localStorage.setItem(STORAGE_KEY_TIME, JSON.stringify(timeDie.values));
-  }, [timeDie.values]);
+    localStorage.setItem(STORAGE_KEY_TIME, JSON.stringify(timeDie));
+  }, [timeDie]);
+
+  const resetToDefault = () => {
+    if (confirm('¿Estás seguro de que quieres restablecer todos los dados a los valores predeterminados?')) {
+      setDice(DEFAULT_DICE);
+      setTimeDie({
+        values: DEFAULT_TIME_VALUES,
+        currentResult: null
+      });
+      localStorage.removeItem(STORAGE_KEY_DICE);
+      localStorage.removeItem(STORAGE_KEY_TIME);
+    }
+  };
 
   useEffect(() => {
     // Initialize bell sound
@@ -347,7 +351,13 @@ export function DiceGame({ onBack }: { onBack: () => void }) {
           Volver
         </button>
         <h2 className="text-2xl font-bold italic serif">Configuración de Dados</h2>
-        <div className="w-20"></div> {/* Spacer */}
+        <button
+          onClick={resetToDefault}
+          className="p-2 text-stone-400 hover:text-stone-900 transition-colors"
+          title="Restablecer predeterminados"
+        >
+          <RotateCcw size={20} />
+        </button>
       </header>
 
       <div className="flex-1">
