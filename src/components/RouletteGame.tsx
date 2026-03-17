@@ -2,6 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Plus, Trash2, RotateCcw, Play, Check, X } from 'lucide-react';
 import { buttonStyles, cardStyles, inputStyles, listStyles } from '../styles/constants';
+import type { GameCategory } from '../types';
+
+interface RouletteGameProps {
+  onBack: () => void;
+  category: GameCategory;
+}
 
 interface Segment {
   id: string;
@@ -9,7 +15,6 @@ interface Segment {
   color: string;
 }
 
-/* COLORES DE LA RULETA */
 const COLORS = [
   '#000000', 
   '#FF0000', 
@@ -26,18 +31,30 @@ const COLORS = [
   '#5907B0', 
 ];
 
-const STORAGE_KEY = 'custom_dice_game_roulette';
+const DEFAULT_SEGMENTS_AZAR = [
+  { id: '1', text: 'Opción 1', color: COLORS[0] },
+  { id: '2', text: 'Opción 2', color: COLORS[1] },
+  { id: '3', text: 'Opción 3', color: COLORS[2] },
+  { id: '4', text: 'Opción 4', color: COLORS[3] },
+];
 
-export function RouletteGame({ onBack }: { onBack: () => void }) {
+const DEFAULT_SEGMENTS_PAREJA = [
+  { id: 'p1', text: 'Masaje 5 min', color: COLORS[0] },
+  { id: 'p2', text: 'Cena romántica', color: COLORS[1] },
+  { id: 'p3', text: 'Baño juntos', color: COLORS[2] },
+  { id: 'p4', text: 'Striptease', color: COLORS[3] },
+  { id: 'p5', text: 'Ver película', color: COLORS[4] },
+  { id: 'p6', text: 'Verdad o Reto', color: COLORS[5] },
+];
+
+export function RouletteGame({ onBack, category }: RouletteGameProps) {
+  const STORAGE_KEY = `custom_dice_game_roulette_${category}`;
+  const DEFAULT_SEGMENTS = category === 'pareja' ? DEFAULT_SEGMENTS_PAREJA : DEFAULT_SEGMENTS_AZAR;
+
   const [segments, setSegments] = useState<Segment[]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY + '_segments');
     if (saved) return JSON.parse(saved);
-    return [
-      { id: '1', text: 'Opción 1', color: COLORS[0] },
-      { id: '2', text: 'Opción 2', color: COLORS[1] },
-      { id: '3', text: 'Opción 3', color: COLORS[2] },
-      { id: '4', text: 'Opción 4', color: COLORS[3] },
-    ];
+    return DEFAULT_SEGMENTS;
   });
 
   const [newOption, setNewOption] = useState('');
@@ -193,12 +210,7 @@ export function RouletteGame({ onBack }: { onBack: () => void }) {
 
   const resetWheel = () => {
     if (confirm('¿Restablecer la ruleta?')) {
-      setSegments([
-        { id: '1', text: 'Opción 1', color: COLORS[0] },
-        { id: '2', text: 'Opción 2', color: COLORS[1] },
-        { id: '3', text: 'Opción 3', color: COLORS[2] },
-        { id: '4', text: 'Opción 4', color: COLORS[3] },
-      ]);
+      setSegments(DEFAULT_SEGMENTS);
       setWinner(null);
       setShowWinnerModal(false);
     }
@@ -214,7 +226,7 @@ export function RouletteGame({ onBack }: { onBack: () => void }) {
           <ArrowLeft size={20} />
           Volver
         </button>
-        <h2 className="text-2xl font-bold italic serif">Ruleta</h2>
+        <h2 className="text-2xl font-bold italic serif">Ruleta de Decisiones</h2>
         <button
           onClick={resetWheel}
           className="p-2 text-stone-400 hover:text-stone-900 transition-colors"
@@ -371,3 +383,20 @@ export function RouletteGame({ onBack }: { onBack: () => void }) {
     </div>
   );
 }
+
+
+/* const COLORS = [
+  '#000000', 
+  '#FF0000', 
+  '#800000', 
+  '#C9189E', 
+  '#808000', 
+  '#00FF00', 
+  '#008000', 
+  '#00FFFF',
+  '#008080',
+  '#0000FF',
+  '#FF00FF',
+  '#800080',
+  '#5907B0', 
+]; */

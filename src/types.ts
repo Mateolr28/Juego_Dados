@@ -10,4 +10,6 @@ export interface TimeDie {
   currentResult: number | null;
 }
 
+export type GameCategory = 'azar' | 'pareja';
+
 export type View = 'home' | 'dice-game' | 'kama-game' | 'roulette-game';

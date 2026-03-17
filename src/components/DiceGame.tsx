@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Play, Timer, ArrowLeft, Trash2, RotateCcw } from 'lucide-react';
-import type { Die, TimeDie } from '../types';
+import type { Die, TimeDie, GameCategory } from '../types';
+
+interface DiceGameProps {
+  onBack: () => void;
+  category: GameCategory;
+}
 import { cardStyles, buttonStyles, inputStyles, listStyles } from '../styles/constants';
 
 interface DieCardProps {
@@ -178,27 +183,43 @@ function TimeDieCard({ timeDie, onUpdate, isRolling }: TimeDieCardProps) {
   );
 }
 
-const STORAGE_KEY_DICE = 'custom_dice_game_dice_v2';
-const STORAGE_KEY_TIME = 'custom_dice_game_time_v2';
-
-const DEFAULT_DICE: Die[] = [
+const DEFAULT_DICE_AZAR: Die[] = [
   {
-    id: 'default-1',
+    id: 'azar-1',
     name: 'Acción',
     values: ['Correr', 'Saltar', 'Bailar', 'Cantar', 'Girar'],
     currentResult: null
   },
   {
-    id: 'default-2',
+    id: 'azar-2',
     name: 'Lugar',
     values: ['Cocina', 'Sala', 'Patio', 'Habitación', 'Baño'],
     currentResult: null
   }
 ];
 
+const DEFAULT_DICE_PAREJA: Die[] = [
+  {
+    id: 'pareja-1',
+    name: 'Acción',
+    values: ['Besar', 'Acariciar', 'Morder', 'Soplar', 'Lamer'],
+    currentResult: null
+  },
+  {
+    id: 'pareja-2',
+    name: 'Parte del cuerpo',
+    values: ['Cuello', 'Oreja', 'Labios', 'Espalda', 'Muslo'],
+    currentResult: null
+  }
+];
+
 const DEFAULT_TIME_VALUES = [30, 45, 60, 120];
 
-export function DiceGame({ onBack }: { onBack: () => void }) {
+export function DiceGame({ onBack, category }: DiceGameProps) {
+  const STORAGE_KEY_DICE = `custom_dice_game_dice_v2_${category}`;
+  const STORAGE_KEY_TIME = `custom_dice_game_time_v2_${category}`;
+  const DEFAULT_DICE = category === 'pareja' ? DEFAULT_DICE_PAREJA : DEFAULT_DICE_AZAR;
+
   const [dice, setDice] = useState<Die[]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY_DICE);
     if (saved) {
