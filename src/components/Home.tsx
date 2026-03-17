@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Dices, Gamepad2, BedDouble } from 'lucide-react';
+import { Dices, Gamepad2, Disc, BedDouble} from 'lucide-react';
 import type { View } from '../types';
 
 interface HomeProps {
@@ -15,7 +15,7 @@ export function Home({ onNavigate }: HomeProps) {
         className="text-center mb-8 md:mb-12"
       >
         <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-2 italic serif">
-          Juego <span className="text-stone-400">Dados</span>
+          Dados <span className="text-stone-400">Personalizados</span>
         </h1>
         <p className="text-sm md:text-base text-stone-500 font-medium px-4">Crea tus propias reglas, lanza los dados.</p>
       </motion.div>
@@ -43,8 +43,21 @@ export function Home({ onNavigate }: HomeProps) {
           <div className="w-14 h-14 md:w-16 md:h-16 bg-stone-900 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-stone-800 transition-colors">
             <BedDouble className="text-white w-7 h-7 md:w-8 md:h-8" />
           </div>
-          <span className="text-lg md:text-xl font-semibold">Explorador Kama</span>
+          <span className="text-lg md:text-xl font-semibold">Juego Kama</span>
           <span className="text-xs md:text-sm text-stone-400 mt-1">Descubre posiciones</span>
+        </motion.button>
+
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => onNavigate('roulette-game')}
+          className="flex flex-col items-center justify-center p-6 md:p-8 bg-white border border-stone-200 rounded-3xl shadow-sm hover:shadow-md transition-all group md:col-span-2"
+        >
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-stone-900 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-stone-800 transition-colors">
+            <Disc className="text-white w-7 h-7 md:w-8 md:h-8" />
+          </div>
+          <span className="text-lg md:text-xl font-semibold">Ruleta de Decisiones</span>
+          <span className="text-xs md:text-sm text-stone-400 mt-1">Gira</span>
         </motion.button>
       </div>
     </div>

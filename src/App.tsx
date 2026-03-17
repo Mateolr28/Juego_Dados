@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Home } from './components/Home';
 import { DiceGame } from './components/DiceGame';
 import { KamasutraGame } from './components/KamasutraGame';
+import { RouletteGame } from './components/RouletteGame';
 import type { View } from './types';
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
       {view === 'home' && <Home onNavigate={setView} />}
       {view === 'dice-game' && <DiceGame onBack={() => setView('home')} />}
       {view === 'kama-game' && <KamasutraGame onBack={() => setView('home')} />}
+      {view === 'roulette-game' && <RouletteGame onBack={() => setView('home')} />}
     </div>
   );
 }
