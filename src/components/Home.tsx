@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Dices, Gamepad2, Disc, Sparkles, Heart, ArrowLeft, BedDouble } from 'lucide-react';
+import { Dices, Gamepad2, Disc, Sparkles, Heart, ArrowLeft, Beer, BedDouble } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import type { View, GameCategory } from '../types';
 
@@ -37,7 +37,7 @@ export function Home({ onNavigate }: HomeProps) {
             >
               <CategoryCard
                 title="Juegos de Azar"
-                description="Cada jugada es una oportunidad, cada giro puede cambiarlo todo"
+                description="Dados, Ruleta y Botella para decisiones rápidas"
                 icon={<Sparkles className="text-white w-8 h-8" />}
                 onClick={() => setSelectedCategory('azar')}
                 color="bg-stone-900"
@@ -72,7 +72,7 @@ export function Home({ onNavigate }: HomeProps) {
                     <Sparkles className="text-stone-400" size={20} />
                     <h2 className="text-xl font-bold italic serif">Juegos de Azar</h2>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <GameCard
                       title="Juego de Dados"
                       description="Configura y lanza tus dados"
@@ -84,6 +84,12 @@ export function Home({ onNavigate }: HomeProps) {
                       description="Gira y elimina opciones"
                       icon={<Disc className="text-white w-7 h-7" />}
                       onClick={() => onNavigate('roulette-game', 'azar')}
+                    />
+                    <GameCard
+                      title="Juego de la Botella"
+                      description="¿A quién le tocará?"
+                      icon={<Beer className="text-white w-7 h-7" />}
+                      onClick={() => onNavigate('bottle-game')}
                     />
                   </div>
                 </section>
@@ -99,7 +105,7 @@ export function Home({ onNavigate }: HomeProps) {
                     <GameCard
                       title="Explorador Kama"
                       description="Descubre nuevas posiciones"
-                      icon={<BedDouble className="text-white w-7 h-7 md:w-8 md:h-8" />}
+                      icon={<BedDouble className="text-white w-7 h-7" />}
                       onClick={() => onNavigate('kama-game')}
                     />
                     <GameCard
