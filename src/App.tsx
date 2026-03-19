@@ -4,6 +4,7 @@ import { DiceGame } from './components/DiceGame';
 import { KamasutraGame } from './components/KamasutraGame';
 import { RouletteGame } from './components/RouletteGame';
 import { BottleGame } from './components/BottleGame';
+import { StairsGame } from './components/StairsGame';
 import type { View, GameCategory } from './types';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
       {view === 'kama-game' && <KamasutraGame onBack={() => setView('home')} />}
       {view === 'roulette-game' && <RouletteGame category={category} onBack={() => setView('home')} />}
       {view === 'bottle-game' && <BottleGame onBack={() => setView('home')} />}
+      {view === 'stairs-game' && <StairsGame onBack={() => setView('home')} />}
     </div>
   );
 }

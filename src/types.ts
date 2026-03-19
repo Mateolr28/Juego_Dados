@@ -12,4 +12,4 @@ export interface TimeDie {
 
 export type GameCategory = 'azar' | 'pareja';
 
-export type View = 'home' | 'dice-game' | 'kama-game' | 'roulette-game' | 'bottle-game';
+export type View = 'home' | 'dice-game' | 'kama-game' | 'roulette-game' | 'bottle-game'| 'stairs-game';

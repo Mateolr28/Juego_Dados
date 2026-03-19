@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Dices, Gamepad2, Disc, Sparkles, Heart, ArrowLeft, Beer, BedDouble } from 'lucide-react';
+import { Dices, Gamepad2, Disc, Sparkles, Heart, ArrowLeft, Beer, BedDouble, LayoutGrid } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import type { View, GameCategory } from '../types';
 
@@ -119,6 +119,12 @@ export function Home({ onNavigate }: HomeProps) {
                       description="Retos y premios"
                       icon={<Disc className="text-white w-7 h-7" />}
                       onClick={() => onNavigate('roulette-game', 'pareja')}
+                    />
+                    <GameCard
+                      title="Escalera del Deseo"
+                      description='Sube y baja con retos'
+                      icon={<LayoutGrid className="text-white w-7 h7"/>}
+                      onClick={() => onNavigate('stairs-game')}
                     />
                   </div>
                 </section>
