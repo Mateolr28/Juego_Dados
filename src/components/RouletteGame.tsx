@@ -40,11 +40,9 @@ const DEFAULT_SEGMENTS_AZAR = [
 
 const DEFAULT_SEGMENTS_PAREJA = [
   { id: 'p1', text: 'Masaje 5 min', color: COLORS[0] },
-  { id: 'p2', text: 'Cena romántica', color: COLORS[1] },
-  { id: 'p3', text: 'Baño juntos', color: COLORS[2] },
-  { id: 'p4', text: 'Striptease', color: COLORS[3] },
-  { id: 'p5', text: 'Ver película', color: COLORS[4] },
-  { id: 'p6', text: 'Verdad o Reto', color: COLORS[5] },
+  { id: 'p2', text: 'Baño juntos', color: COLORS[2] },
+  { id: 'p3', text: 'Striptease', color: COLORS[3] },
+  { id: 'p4', text: 'Ver porno', color: COLORS[4] },
 ];
 
 export function RouletteGame({ onBack, category }: RouletteGameProps) {

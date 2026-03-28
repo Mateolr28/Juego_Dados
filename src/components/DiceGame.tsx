@@ -202,13 +202,19 @@ const DEFAULT_DICE_PAREJA: Die[] = [
   {
     id: 'pareja-1',
     name: 'Acción',
-    values: ['Besar', 'Acariciar', 'Morder', 'Soplar', 'Lamer'],
+    values: ['Besar', 'Acariciar', 'Morder', 'Chupar', 'Lamer'],
     currentResult: null
   },
   {
     id: 'pareja-2',
     name: 'Parte del cuerpo',
-    values: ['Cuello', 'Oreja', 'Labios', 'Espalda', 'Muslo'],
+    values: ['Labios', 'Vagina', 'Pene', 'Senos', 'Cuello', 'Abdomen', 'Ano'],
+    currentResult: null
+  },
+  {
+    id: 'pareja-2',
+    name: 'Intensidad',
+    values: ['Fuerte', 'suave', 'Rapido', 'Lento'],
     currentResult: null
   }
 ];
